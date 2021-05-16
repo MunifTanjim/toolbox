@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "incremental": false,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "module": "esnext",
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": "src",
+    "paths": {
+      "*": ["*"],
+      "test-utils": ["./utils/test-utils"]
+    }
+  },
+  "include": ["next-env.d.ts", "src"],
+  "exclude": ["node_modules"]
+}
