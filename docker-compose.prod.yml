@@ -43,3 +43,38 @@ services:
       - ./docker/.volumes/letsencrypt:/etc/letsencrypt
       - ./docker/.volumes/certbot-webroot:/certbot-webroot
     restart: 'no'
+
+  backend:
+    image: muniftanjim/toolbox-backend:latest
+    build:
+      context: ./
+      dockerfile: ./apps/backend/prod.Dockerfile
+    networks:
+      prod:
+        ipv4_address: 10.1.0.110
+    ports:
+      - 9000:9000
+    restart: always
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./apps/backend/.env.production:/toolbox/apps/backend/.env:ro
+      - ./apps/backend/.env.production.local:/toolbox/apps/backend/.env.local:ro
+
+  frontend:
+    image: muniftanjim/toolbox-frontend:latest
+    build:
+      context: ./
+      dockerfile: ./apps/frontend/prod.Dockerfile
+    networks:
+      prod:
+        ipv4_address: 10.1.0.120
+    ports:
+      - 3000:3000
+    restart: always
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./apps/frontend/.env.production:/app/frontend/.env:ro
+      - ./apps/frontend/.env.production.local:/app/frontend/.env.local:ro
+      - ./apps/frontend/.next:/toolbox/apps/frontend/.next
