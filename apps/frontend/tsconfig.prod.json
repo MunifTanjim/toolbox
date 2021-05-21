@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "./build",
+    "rootDir": "./"
+  },
+  "include": ["next-env.d.ts", "src"],
+  "exclude": [
+    "node_modules",
+    "src/**/__*__/**",
+    "src/utils/test-utils",
+    "src/**/*.test.*"
+  ]
+}
