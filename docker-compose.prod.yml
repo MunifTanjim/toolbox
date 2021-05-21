@@ -30,6 +30,21 @@ services:
       - ./docker/.volumes/certbot-webroot:/var/www/certbot:ro
     restart: always
 
+  database:
+    hostname: database
+    build:
+      context: ./docker/database
+      dockerfile: ./prod.Dockerfile
+    env_file: ./docker/database/.env.production.local
+    networks:
+      prod:
+        ipv4_address: 10.1.0.20
+    ports:
+      - ${DATABASE_PORT:-9902}:5432
+    volumes:
+      - ./docker/.volumes/postgres/toolbox:/var/lib/postgresql/data/toolbox
+    restart: unless-stopped
+
   letsencrypt:
     hostname: letsencrypt
     build:
