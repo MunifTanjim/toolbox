@@ -1,7 +1,7 @@
 import express from 'express';
 import { useCatcherMiddlewares } from 'middlewares/catchers';
 import { useRequestLoggerMiddleware } from 'middlewares/request-logger';
-import { useHealthRouter } from 'routes/health';
+import { useHealthRouter } from 'modules/health/express';
 
 const app = express();
 
