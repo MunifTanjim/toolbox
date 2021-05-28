@@ -8,11 +8,14 @@ import type {
   QueryBuilder,
   QueryBuilderType,
   TransactionOrKnex,
+  Validator,
 } from 'objection';
 import { Model } from 'objection';
 import path from 'path';
+import type { Struct } from 'superstruct';
+import { StructValidator } from './validator';
 
-const modelPaths = [path.resolve(__dirname)];
+const modelPaths = [path.resolve(__dirname, '..')];
 
 /* Modifiers */
 const selectId = <M extends Model, R>(
@@ -25,13 +28,18 @@ const relatedQueryMethodSymbol = Symbol(
   'objection-model-static-related-query-method'
 );
 
-class BaseModel extends Model {
-  created!: Date;
-  updated!: Date;
+export class BaseModel extends Model {
+  createdAt!: Date;
+  updatedAt!: Date;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static struct: Struct<any, any>;
+
+  static createValidator(): Validator {
+    return new StructValidator();
+  }
 
   static [queryMethodSymbol] = Model.query;
-  static [relatedQueryMethodSymbol] = Model.relatedQuery;
-
   static query<M extends Model>(
     this: Constructor<M> & { [queryMethodSymbol]: ModelClass<M>['query'] },
     trxOrKnexOrType?: TransactionOrKnex | 'read' | 'write'
@@ -43,6 +51,7 @@ class BaseModel extends Model {
     return this[queryMethodSymbol](trxOrKnexOrType).skipUndefined();
   }
 
+  static [relatedQueryMethodSymbol] = Model.relatedQuery;
   static relatedQuery<M extends Model, K extends keyof M>(
     this: Constructor<M> & {
       [relatedQueryMethodSymbol]: ModelClass<M>['relatedQuery'];
@@ -73,5 +82,7 @@ class BaseModel extends Model {
     selectId,
   };
 }
+
+BaseModel.knex(pickKnex());
 
 export default BaseModel;

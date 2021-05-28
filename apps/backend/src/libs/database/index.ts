@@ -1,6 +1,5 @@
 import type { Transaction } from 'knex';
 import Knex from 'knex';
-import { Model } from 'objection';
 import { roundRobin } from 'utils/round-robin';
 import { clientConfigs, masterConfig, replicaConfigs } from './config';
 import { getConnectionUri } from './connection-uri';
@@ -31,8 +30,6 @@ export function pickKnex(type: 'read' | 'write' = 'write'): Knex {
 
   return getReadOnlyConnection();
 }
-
-Model.knex(masterConnection);
 
 /**
  * Perform database operation inside transaction
