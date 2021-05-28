@@ -40,3 +40,17 @@ services:
     volumes:
       - ./docker/.volumes/postgres/toolbox:/var/lib/postgresql/data/toolbox
     restart: unless-stopped
+
+  redis:
+    hostname: redis
+    build:
+      context: ./docker/redis
+      dockerfile: ./dev.Dockerfile
+    networks:
+      dev:
+        ipv4_address: 10.0.0.30
+    ports:
+      - 9903:6379
+    volumes:
+      - ./docker/.volumes/redis/data:/data
+    restart: unless-stopped
