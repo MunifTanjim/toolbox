@@ -20,6 +20,7 @@
     "express-async-errors": "^3.1.1",
     "ioredis": "^4.27.3",
     "knex": "^0.21.19",
+    "ksuid": "^2.0.0",
     "lodash": "^4.17.21",
     "luxon": "^1.27.0",
     "ms": "^2.1.3",
