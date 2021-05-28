@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import { useCatcherMiddlewares } from 'middlewares/catchers';
 import { useRequestLoggerMiddleware } from 'middlewares/request-logger';
+import { useGithubRouter } from 'modules/github/express';
 import { useHealthRouter } from 'modules/health/express';
 
 const cookieConifg = config.get('cookie');
@@ -16,6 +17,7 @@ app.use(cookieParser(cookieConifg.secret));
 useRequestLoggerMiddleware(app);
 
 useHealthRouter(app);
+useGithubRouter(app);
 
 useCatcherMiddlewares(app);
 

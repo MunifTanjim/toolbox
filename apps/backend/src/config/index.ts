@@ -164,6 +164,27 @@ export const config = convict({
       env: 'REDIS_PORT',
     },
   },
+  module: {
+    github: {
+      app: {
+        oauth: {
+          clientId: {
+            doc: 'GitHub App OAuth Client ID',
+            format: String,
+            default: '',
+            env: 'MODULE_GITHUB_APP_OAUTH_CLIENT_ID',
+          },
+          clientSecret: {
+            doc: 'GitHub App OAuth Client Secret',
+            format: String,
+            default: '',
+            env: 'MODULE_GITHUB_APP_OAUTH_CLIENT_SECRET',
+            sensitive: true,
+          },
+        },
+      },
+    },
+  },
 });
 
 config.validate({ allowed: 'strict' });
