@@ -1,6 +1,7 @@
 import type { Application, ErrorRequestHandler, Handler } from 'express';
 import log from 'libs/logger';
 import ResponseError from 'libs/response-error';
+import { validationErrorHandler } from 'libs/validator/request';
 
 const notFoundHandler: Handler = (req): void => {
   throw new ResponseError(404, `API Endpoint Not Found!`, [
@@ -39,6 +40,7 @@ const errorLogHandler: ErrorRequestHandler = (err, _req, _res, _next): void => {
 export const useCatcherMiddlewares = (app: Application): void => {
   app.use(notFoundHandler);
 
+  app.use(validationErrorHandler);
   app.use(errorRespondHandler);
   app.use(errorLogHandler);
 };
