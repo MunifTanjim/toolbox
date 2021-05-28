@@ -43,12 +43,43 @@ export const config = convict({
     default: 'info' as LogLevel,
     env: 'LOG_LEVEL',
   },
+  domain: {
+    backend: {
+      doc: 'Backend Domain',
+      format: String,
+      default: 'api.toolbox.local',
+      env: 'DOMAIN_BACKEND',
+    },
+    frontend: {
+      doc: 'Frontend Domain',
+      format: String,
+      default: 'toolbox.local',
+      env: 'DOMAIN_FRONTEND',
+    },
+  },
   express: {
     killTimeout: {
       doc: 'Kill Timeout',
       format: 'time',
       default: '5s' as unknown as number,
       env: 'EXPRESS_KILL_TIMEOUT',
+    },
+  },
+  cookie: {
+    secret: {
+      doc: 'Cookie Secret',
+      format: String,
+      default: '',
+      env: 'COOKIE_SECRET',
+      sensitive: true,
+    },
+    name: {
+      session: {
+        doc: 'Cookie Name (Session)',
+        format: String,
+        default: '__ts__',
+        env: 'COOKIE_NAME_SESSION',
+      },
     },
   },
   database: {
