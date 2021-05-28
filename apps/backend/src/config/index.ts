@@ -43,6 +43,14 @@ export const config = convict({
     default: 'info' as LogLevel,
     env: 'LOG_LEVEL',
   },
+  express: {
+    killTimeout: {
+      doc: 'Kill Timeout',
+      format: 'time',
+      default: '5s' as unknown as number,
+      env: 'EXPRESS_KILL_TIMEOUT',
+    },
+  },
   database: {
     name: {
       doc: 'Database name',
@@ -111,12 +119,18 @@ export const config = convict({
       },
     },
   },
-  express: {
-    killTimeout: {
-      doc: 'Kill Timeout',
-      format: 'time',
-      default: '5s' as unknown as number,
-      env: 'EXPRESS_KILL_TIMEOUT',
+  redis: {
+    host: {
+      doc: 'Redis Connection URI',
+      format: String,
+      default: '127.0.0.1',
+      env: 'REDIS_HOST',
+    },
+    port: {
+      doc: 'Redis Connection URI',
+      format: 'port',
+      default: 6379,
+      env: 'REDIS_PORT',
     },
   },
 });
