@@ -2,6 +2,7 @@ import config from 'config';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import { useCatcherMiddlewares } from 'middlewares/catchers';
+import { useCors } from 'middlewares/cors';
 import { useRequestLoggerMiddleware } from 'middlewares/request-logger';
 import { useAuthRouter } from 'modules/auth/express';
 import { useGithubRouter } from 'modules/github/express';
@@ -11,9 +12,11 @@ const cookieConifg = config.get('cookie');
 
 const app = express();
 
-app.use(express.json());
+useCors(app);
 
 app.use(cookieParser(cookieConifg.secret));
+
+app.use(express.json());
 
 useRequestLoggerMiddleware(app);
 
