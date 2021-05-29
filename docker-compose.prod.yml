@@ -104,6 +104,6 @@ services:
     environment:
       - NODE_ENV=production
     volumes:
-      - ./apps/frontend/.env.production:/app/frontend/.env:ro
-      - ./apps/frontend/.env.production.local:/app/frontend/.env.local:ro
+      - ./apps/frontend/.env.production:/toolbox/apps/frontend/.env:ro
+      - ./apps/frontend/.env.production.local:/toolbox/apps/frontend/.env.local:ro
       - ./apps/frontend/.next:/toolbox/apps/frontend/.next
