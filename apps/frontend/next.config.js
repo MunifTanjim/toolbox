@@ -1,6 +1,6 @@
 const transpileModules = require('next-transpile-modules');
 
-const withTM = transpileModules(['lodash-es']);
+const withTM = transpileModules(['ky', 'lodash-es']);
 
 module.exports = withTM({
   future: {

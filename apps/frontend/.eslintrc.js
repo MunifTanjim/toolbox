@@ -34,6 +34,7 @@ module.exports = {
       extends: [...commonExtends],
       rules: {
         ...commonRules,
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
       },
     },
   ],
