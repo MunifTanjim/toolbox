@@ -184,6 +184,23 @@ export const config = convict({
         },
       },
     },
+    lastfm: {
+      app: {
+        apiKey: {
+          doc: 'Last.fm App API Key',
+          format: String,
+          default: '',
+          env: 'MODULE_LASTFM_APP_API_KEY',
+        },
+        sharedSecret: {
+          doc: 'Last.fm App Shared Secret',
+          format: String,
+          default: '',
+          env: 'MODULE_LASTFM_APP_SHARED_SECRET',
+          sensitive: true,
+        },
+      },
+    },
   },
 });
 
