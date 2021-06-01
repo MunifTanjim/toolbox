@@ -7,6 +7,7 @@ import { useRequestLoggerMiddleware } from 'middlewares/request-logger';
 import { useAuthRouter } from 'modules/auth/express';
 import { useGithubRouter } from 'modules/github/express';
 import { useHealthRouter } from 'modules/health/express';
+import { useLastfmRouter } from 'modules/lastfm/express';
 
 const cookieConifg = config.get('cookie');
 
@@ -23,6 +24,7 @@ useRequestLoggerMiddleware(app);
 useHealthRouter(app);
 useAuthRouter(app);
 useGithubRouter(app);
+useLastfmRouter(app);
 
 useCatcherMiddlewares(app);
 
