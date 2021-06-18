@@ -3,9 +3,6 @@ const transpileModules = require('next-transpile-modules');
 const withTM = transpileModules(['ky', 'lodash-es']);
 
 module.exports = withTM({
-  future: {
-    webpack5: true,
-  },
   reactStrictMode: true,
   webpack: (config) => {
     /**
