@@ -18,8 +18,8 @@ services:
       prod:
         ipv4_address: 10.1.0.10
     ports:
-      - 80:80
-      - 443:443
+      - 127.0.0.1:80:80
+      - 127.0.0.1:443:443
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     volumes:
@@ -40,7 +40,7 @@ services:
       prod:
         ipv4_address: 10.1.0.20
     ports:
-      - ${DATABASE_PORT:-9902}:5432
+      - 127.0.0.1:${DATABASE_PORT:-9902}:5432
     volumes:
       - ./docker/.volumes/postgres/toolbox:/var/lib/postgresql/data/toolbox
     restart: unless-stopped
@@ -54,7 +54,7 @@ services:
       prod:
         ipv4_address: 10.1.0.30
     ports:
-      - 9903:6379
+      - 127.0.0.1:9903:6379
     volumes:
       - ./docker/.volumes/redis/data:/data
     restart: unless-stopped
@@ -82,7 +82,7 @@ services:
       prod:
         ipv4_address: 10.1.0.110
     ports:
-      - 9000:9000
+      - 127.0.0.1:9000:9000
     restart: always
     environment:
       - NODE_ENV=production
@@ -99,7 +99,7 @@ services:
       prod:
         ipv4_address: 10.1.0.120
     ports:
-      - 3000:3000
+      - 127.0.0.1:3000:3000
     restart: always
     environment:
       - NODE_ENV=production
