@@ -117,10 +117,24 @@ setup_dev_ssl() {
   ensure_tool certutil
 }
 
+check_ufw() {
+  if command_exists ufw; then
+    echo
+    echo "If 'ufw' is enabled, run the following commands:"
+    echo
+    echo "  sudo ufw allow in from 10.0.0.0/24 to any port 3000,9000 proto tcp"
+    echo "  sudo ufw reload"
+    echo
+    echo "This will allow nginx inside docker to reach applications running on host."
+    echo
+  fi
+}
+
 setup_hostess
 setup_mkcert
 set_local_domains
 set_environment_variables
 setup_dev_ssl
+check_ufw
 
 echo "Done!"
