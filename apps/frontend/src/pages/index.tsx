@@ -1,4 +1,5 @@
 import { Button } from '@chakra-ui/button';
+import { useColorMode } from '@chakra-ui/color-mode';
 import { Image } from '@chakra-ui/image';
 import { Flex, Heading, Link, VStack } from '@chakra-ui/layout';
 import { useSession } from 'hooks/useSession';
@@ -7,10 +8,12 @@ import { Layout } from '../components/Layout';
 export default function Home(): JSX.Element {
   useSession({ onAuthedRedirect: '/dash' });
 
+  const { colorMode } = useColorMode();
+
   return (
-    <Layout title="Toolbox" align="center" justify="center" bgColor="gray.800">
+    <Layout title="Toolbox" align="center" justify="center">
       <VStack direction="column" justify="center" align="center" spacing={8}>
-        <Heading size="3xl" color="gray.100" textTransform="uppercase">
+        <Heading size="3xl" textTransform="uppercase">
           Toolbox
         </Heading>
 
@@ -18,7 +21,7 @@ export default function Home(): JSX.Element {
           <Button
             leftIcon={
               <Image
-                src={'/images/github-mark-dark.png'}
+                src={`/images/github-mark-${colorMode}.png`}
                 alt="GitHub logo"
                 h="1.5em"
               />

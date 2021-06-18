@@ -7,12 +7,7 @@ export default function Dash(): JSX.Element {
   const session = useSession({ onUnauthedRedirect: '/' });
 
   return (
-    <Layout
-      title="Toolbox Dashboard"
-      align="center"
-      justify="center"
-      bgColor="gray.800"
-    >
+    <Layout title="Toolbox Dashboard" align="center" justify="center">
       <VStack direction="column" justify="center" align="center" spacing={8}>
         <Heading size="3xl" color="gray.100" textTransform="uppercase">
           Hello, {session.user?.name}!
