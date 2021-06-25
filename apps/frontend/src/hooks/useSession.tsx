@@ -1,5 +1,5 @@
 import NextRouter from 'next/router';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import type { APIData } from 'utils/api';
 import { api, HTTPError } from 'utils/api';
@@ -40,6 +40,7 @@ export function useSession<Options extends UseSessionOptions>(
   error?: Error;
   isAuthed: boolean;
   isLoading: boolean;
+  isRefreshing: boolean;
   signout: () => Promise<void>;
 };
 export function useSession({
@@ -47,13 +48,15 @@ export function useSession({
   onUnauthedRedirect,
 }: UseSessionOptions = {}) {
   const {
-    data: user = null,
+    data: user,
     error,
-    isValidating: isLoading,
+    isValidating,
     mutate,
   } = useSWR('auth/user', fetchUser);
 
   const isAuthed = Boolean(user);
+  const isLoading = typeof user === 'undefined';
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   useEffect(() => {
     if (!isLoading) {
@@ -66,15 +69,20 @@ export function useSession({
   }, [isAuthed, isLoading, onAuthedRedirect, onUnauthedRedirect]);
 
   const signout = useCallback(async () => {
-    await api('auth/signout', { method: 'post' });
-    await mutate(null, false);
+    setIsRefreshing(true);
+    await mutate(async () => {
+      await api('auth/signout', { method: 'post' });
+      return null;
+    }, false);
+    setIsRefreshing(false);
   }, [mutate]);
 
   return {
-    user,
+    user: user ?? null,
     error,
     isAuthed,
     isLoading,
+    isRefreshing: isRefreshing || isValidating,
     signout,
   };
 }

@@ -1,12 +1,12 @@
 import { render, screen } from 'test-utils';
-import { Layout } from './Layout';
+import { BaseLayout } from './BaseLayout';
 
-describe('Layout', () => {
+describe('BaseLayout', () => {
   test('renders correctly', () => {
     render(
-      <Layout data-testid="layout" title="Test">
+      <BaseLayout data-testid="layout" title="Test">
         Content
-      </Layout>
+      </BaseLayout>
     );
 
     expect(screen.getByTestId('layout').innerHTML).toMatchInlineSnapshot(

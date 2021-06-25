@@ -1,6 +1,5 @@
 import { Flex, FlexProps } from '@chakra-ui/layout';
 import { Spinner } from '@chakra-ui/spinner';
-import { useSession } from 'hooks/useSession';
 import NextHead from 'next/head';
 
 function Head({ title }: { title: string }) {
@@ -11,18 +10,18 @@ function Head({ title }: { title: string }) {
   );
 }
 
-type LayoutProps = {
+export type BaseLayoutProps = {
   children: React.ReactNode;
+  isLoading?: boolean;
   title: string;
 } & FlexProps;
 
-export function Layout({
+export function BaseLayout({
   children,
+  isLoading,
   title,
   ...props
-}: LayoutProps): JSX.Element {
-  const { isLoading } = useSession();
-
+}: BaseLayoutProps): JSX.Element {
   return (
     <>
       <Head title={title} />

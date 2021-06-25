@@ -2,16 +2,21 @@ import { Button } from '@chakra-ui/button';
 import { useColorMode } from '@chakra-ui/color-mode';
 import { Image } from '@chakra-ui/image';
 import { Flex, Heading, Link, VStack } from '@chakra-ui/layout';
+import { BaseLayout } from 'components/layouts';
 import { useSession } from 'hooks/useSession';
-import { Layout } from '../components/Layout';
 
 export default function Home(): JSX.Element {
-  useSession({ onAuthedRedirect: '/dash' });
+  const { isLoading } = useSession({ onAuthedRedirect: '/dash' });
 
   const { colorMode } = useColorMode();
 
   return (
-    <Layout title="Toolbox" align="center" justify="center">
+    <BaseLayout
+      isLoading={isLoading}
+      title="Toolbox"
+      align="center"
+      justify="center"
+    >
       <VStack direction="column" justify="center" align="center" spacing={8}>
         <Heading size="3xl" textTransform="uppercase">
           Toolbox
@@ -34,6 +39,6 @@ export default function Home(): JSX.Element {
           </Button>
         </Flex>
       </VStack>
-    </Layout>
+    </BaseLayout>
   );
 }
