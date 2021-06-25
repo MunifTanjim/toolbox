@@ -3,14 +3,8 @@ import { BaseLayout } from './BaseLayout';
 
 describe('BaseLayout', () => {
   test('renders correctly', () => {
-    render(
-      <BaseLayout data-testid="layout" title="Test">
-        Content
-      </BaseLayout>
-    );
+    render(<BaseLayout title="Test">Content</BaseLayout>);
 
-    expect(screen.getByTestId('layout').innerHTML).toMatchInlineSnapshot(
-      `"Content"`
-    );
+    expect(screen.queryByText('Content')).not.toBeNull();
   });
 });
