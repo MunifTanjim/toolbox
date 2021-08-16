@@ -26,6 +26,7 @@ COPY --from=builder --chown=node ./toolbox/apps/frontend/node_modules ./apps/fro
 COPY --from=builder --chown=node ./toolbox/apps/frontend/build/src ./apps/frontend/src
 COPY --chown=node ./apps/frontend/public ./apps/frontend/public
 COPY --chown=node ./apps/frontend/next.config.js ./apps/frontend/
+COPY --chown=node ./apps/frontend/package.json ./apps/frontend/
 COPY --chown=node ./apps/frontend/jsconfig.prod.json ./apps/frontend/jsconfig.json
 COPY --chown=node ./apps/frontend/scripts/docker-entrypoint.prod.sh ./apps/frontend/docker-entrypoint.sh
 
