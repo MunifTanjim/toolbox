@@ -45,6 +45,9 @@ export const theme = extendTheme({
   },
   styles: {
     global: {
+      body: {
+        overflow: 'hidden',
+      },
       a: {
         color: 'inherit',
         textDecoration: 'none',

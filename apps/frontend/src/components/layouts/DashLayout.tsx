@@ -1,6 +1,6 @@
-import { Button } from '@chakra-ui/button';
-import { Heading } from '@chakra-ui/react';
+import { Heading, Flex } from '@chakra-ui/react';
 import { useSession } from 'hooks/useSession';
+import { Topbar } from '../Topbar';
 import type { BaseLayoutProps } from './BaseLayout';
 import { BaseLayout } from './BaseLayout';
 
@@ -11,7 +11,7 @@ export function DashLayout({
   title,
   ...props
 }: DashLayoutProps): JSX.Element | null {
-  const { isAuthed, isLoading, isRefreshing, signout, user } = useSession({
+  const { isAuthed, isLoading, user } = useSession({
     onUnauthedRedirect: '/',
   });
 
@@ -21,11 +21,18 @@ export function DashLayout({
 
   return (
     <BaseLayout isLoading={isLoading} title={title} {...props}>
-      <Heading mb={4}>Howdy, {user.name}!</Heading>
-      <Button colorScheme="red" isLoading={isRefreshing} onClick={signout}>
-        Sign Out
-      </Button>
-      {children}
+      <Topbar />
+
+      <Flex
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        flexGrow={1}
+        w="100%"
+      >
+        <Heading mb={4}>Howdy, {user.name}!</Heading>
+        {children}
+      </Flex>
     </BaseLayout>
   );
 }
