@@ -1,0 +1,7 @@
+# build directories
+.cache
+build
+public/build
+
+# dependency directories
+node_modules

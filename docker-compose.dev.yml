@@ -1,0 +1,44 @@
+version: '3.5'
+
+networks:
+  dev:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.0.0/24
+
+services:
+  nginx:
+    hostname: nginx
+    build:
+      context: ./docker/nginx
+      dockerfile: ./dev.Dockerfile
+    networks:
+      dev:
+        ipv4_address: 10.0.0.10
+    ports:
+      - 127.0.0.1:80:80
+      - 127.0.0.1:443:443
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    volumes:
+      - ./docker/nginx/dev.nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/dev.conf.d:/etc/nginx/conf.d
+      - ./docker/nginx/common.conf.d:/etc/nginx/common.conf.d
+      - ./docker/nginx/dev.certs:/certs
+    restart: unless-stopped
+
+  database:
+    hostname: database
+    build:
+      context: ./docker/database
+      dockerfile: ./dev.Dockerfile
+    networks:
+      dev:
+        ipv4_address: 10.0.0.20
+    ports:
+      - 127.0.0.1:${DATABASE_PORT:-9902}:5432
+    volumes:
+      - ./docker/.volumes/postgres/toolbox:/var/lib/postgresql/data/toolbox
+    restart: unless-stopped

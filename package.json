@@ -1,0 +1,54 @@
+{
+  "private": true,
+  "name": "toolbox",
+  "description": "",
+  "license": "",
+  "scripts": {
+    "build": "remix build",
+    "cz": "npx git-cz",
+    "dev": "remix dev",
+    "lint": "eslint --cache --fix .",
+    "postinstall": "remix setup node",
+    "prepare": "husky install .git-hooks",
+    "start": "remix-serve build"
+  },
+  "dependencies": {
+    "@remix-run/react": "^1.0.6",
+    "@remix-run/serve": "^1.0.6",
+    "knex": "^0.95.14",
+    "objection": "^3.0.0",
+    "pg": "^8.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "remix": "^1.0.6"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "@commitlint/prompt-cli": "^15.0.0",
+    "@remix-run/dev": "^1.0.6",
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/parser": "^5.5.0",
+    "commitizen": "^4.2.4",
+    "conventional-changelog-cli": "^2.1.1",
+    "conventional-changelog-conventionalcommits": "^4.6.1",
+    "eslint": "^8.3.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": ">=10",
+    "prettier": "^2.5.0",
+    "pretty-quick": "^3.1.2",
+    "typescript": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "sideEffects": false
+}

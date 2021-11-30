@@ -1,0 +1,11 @@
+# dotenv files
+.env
+.env.local
+.env.*.local
+
+# dependency directories
+node_modules
+
+# others
+docker/.*
+.yarn-cache
